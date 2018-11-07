@@ -12,3 +12,5 @@ class myclass():
 
     def subs(self,a,b):
         return a - b
+
+c = input()

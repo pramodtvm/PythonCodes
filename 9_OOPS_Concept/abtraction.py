@@ -1,14 +1,56 @@
 
+from abc import ABC, abstractmethod
 
-class myclass():
-    def __init__(self,x):
-        self.x = x
-        #self.y = y
-        print("Initializing Variable")
+class AbstractClassExample(ABC):
+    def __init__(self, value):
+        self.value = value
+        super().__init__()
 
-    def add(self,a,b):
-        print("Printing X",self.x)
-        return a + b
+    @abstractmethod
+    def do_something(self):
+        pass
 
-    def subs(self,a,b):
-        return a - b
+class DoAdd42(AbstractClassExample):
+    def do_something(self):
+        return self.value + 42
+
+class DoMul42(AbstractClassExample):
+    def do_something(self):
+        return self.value * 42
+
+
+#x = DoAdd42(10)
+#y = DoMul42(10)
+#print(x.do_something())
+#print(y.do_something())
+
+
+
+"""
+A class that is derived from an abstract class cannot be instantiated unless all of its abstract methods are overridden.
+
+You may think that abstract methods can't be implemented in the abstract base class. This impression is wrong: 
+An abstract method can have an implementation in the abstract class! Even if they are implemented, designers of 
+subclasses will be forced to override the implementation. Like in other cases of "normal"
+inheritance, the abstract method can be invoked with super() call mechanism. This makes it possible to provide some basic
+functionality in the abstract method, which can be enriched by the subclass implementation.
+
+"""
+
+from abc import ABC, abstractmethod
+
+class AbstractClassExample(ABC):
+
+    @abstractmethod
+    def do_something(self):
+        print("Some implementation!")
+
+
+class AnotherSubclass(AbstractClassExample):
+    def do_something(self):
+        super().do_something()
+        print("The enrichment from AnotherSubclass")
+
+
+x = AnotherSubclass()
+x.do_something()
