@@ -1,4 +1,10 @@
 
+""""
+
+
+
+
+"""
 from abc import ABC, abstractmethod
 
 class AbstractClassExample(ABC):
@@ -40,17 +46,29 @@ functionality in the abstract method, which can be enriched by the subclass impl
 from abc import ABC, abstractmethod
 
 class AbstractClassExample(ABC):
+    def __init__(self):
+        print("initializing Parent")
+        me = 100
+        self.varme = me
 
     @abstractmethod
     def do_something(self):
-        print("Some implementation!")
+        print("Some implementation!",self.varme)
 
+    def do_nothing(self):
+        print("printing nothing",self.varme)
 
 class AnotherSubclass(AbstractClassExample):
+    def __init__(self):
+        print("initialize child")
+
     def do_something(self):
-        super().do_something()
+        #super().__init__()
+        #super().do_nothing()
+        #super().do_something()
         print("The enrichment from AnotherSubclass")
 
-
-x = AnotherSubclass()
-x.do_something()
+#x = AnotherSubclass()
+#x.do_something()
+#x.do_nothing()
+#d = AbstractClassExample()
